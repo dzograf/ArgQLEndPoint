@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>ArgQL EndPoint</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+<script src="javascriptcode.js"></script>
+
+<style>
+.popover{
+    max-width:600px;
+    height:150px;    
+}
+</style>
+
+</head>
+
+
+
+<body>
+ <nav class="navbar navbar-inverse ">
+    <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Home</a></li>
+		  <li><a href="http://corpora.aifdb.org/" target="_blank">AIFdb</a></li>
+		  <li><a href="#" data-toggle="modal" data-target="#examplemodal">Examples</a></li>
+	<!--  <li><a href="https://github.com/dzograf/ArgQLParser" target="_blank">Github</a></li> -->
+		<!--   <li><a href="files/ArgQLFormalSpec.pdf" target="_blank">Formal Specification</a></li> -->
+      <!--     <li class="dropdown-toggle">
+            <a href="http://www.google.com" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Examples</a></li>
+              <li><a href="#">Show in Github</a></li>
+              <li><a href="#">Formal Specification</a></li>
+             <!-- <li role="separator" class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>-->
+          <!--   </ul>
+          </li>
+		  <li><a href="#">Contact</a></li>--> 
+        </ul>
+    </div>
+  </nav>
+  
+
+  <div class="modal fade" id="examplemodal">
+  		<div class="modal-dialog">
+  			<div class="modal-content">
+  				<div class="modal-header">
+  					<button class="close" data-dismiss="modal">&times;</button>
+  					<h4 class="modal-title">ArgQL examples</h4>
+  				</div>
+  				
+  				<div class="modal-body">
+  				
+  				
+  				<div class="form-check">
+  				
+  				  <!------------ QUERY 1: GET ALL ARGUMENTS ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="match ?a: < ?pr, ?c > &#13;&#10;return ?a" checked>
+				  <label class="form-check-label" for="exampleRadios1">
+				   Q1. All arguments
+				  </label>
+				  <p><i>Returns all arguments in the knowledge base</i> 
+				  
+				  <a id="q1" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q1-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q1query" style="font-family: Courier New"> match ?a: &lt; ?pr, ?c &gt; <br /> return ?a </p>			  
+				  </div>
+				  
+				  
+				  <!------------ QUERY 2: GET ARGUMENTS WITH CONCLUSION "some text" ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="match ?a: < ?pr, &quot;This is about creating a university that rivals the world's best university.&quot; > &#13;&#10;return ?a" checked>
+				  <label class="form-check-label" for="exampleRadios2">
+				   Q2. Constant conclusion
+				  </label>
+				  <p><i>Returns arguments with constant conclusion value "some text"</i> 
+				  
+				  <a id="q2" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q2-popover-content" class = "hide">
+				  <h5>Query preview</h5>
+				  <p id="q2query" style="font-family: Courier New"> match ?a: &lt; ?pr, "some text" &gt; <br /> return ?a </p>			  
+				  </div>
+				  
+				  <!------------ QUERY 3: Keyword search ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="match ?a: < ?pr, &quot;%university%&quot; > &#13;&#10;return ?a" checked>
+				  <label class="form-check-label" for="exampleRadios3">
+				   Q3. Keyword searching
+				  </label>
+				  <p><i>Returns arguments that include a particular keyword "some text" in their conclusion. </i> 
+				  
+				  <a id="q3" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q3-popover-content" class = "hide">
+				  <h5>Query preview</h5>
+				  <p id="q3query" style="font-family: Courier New"> match ?a: &lt; ?pr, "%some text%" &gt; <br /> return ?a </p>			  
+				  </div>
+				  
+		 		  <!------------ QUERY 4 ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="match ?a: < ?pr[/{&quot;But freedom is responsibility.&quot;}], ?c > &#13;&#10;return ?a" checked>
+				  <label class="form-check-label" for="exampleRadios4">
+				   Q4. Inclusion - constant proposition set
+				  </label>
+				  <p><i>Returns arguments which include a set of constant proposition values (or equal ones) in their premises.</i> 
+				  
+				  <a id="q4" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q4-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q4query" style="font-family: Courier New"> match ?a: &lt; ?pr[/{"p1", .. , "pn"}], ?c &gt; <br /> return ?a </p>			  
+				  </div>
+  			    
+				  
+				  <!------------ QUERY 5  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="match ?a: < ?pr[.{&quot;But freedom is responsibility.&quot;, &quot;Some other value&quot;}], ?c > &#13;&#10;return ?a" checked>
+				  <label class="form-check-label" for="exampleRadios5">
+				   Q5. Premise conjunction - constant proposition set
+				  </label>
+				  <p><i>Returns arguments whose premises have at least one common element (or equal)  with a constant proposition set.</i> 
+				  
+				  <a id="q5" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q5-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q5query" style="font-family: Courier New"> match ?a: &lt; ?pr[.{"p1", "p2"}], ?c &gt; <br /> return ?a </p>			  
+				  </div>
+				  
+				  <!------------ QUERY 6  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="match ?a: < ?pr1, ?c1 >, ?b: < ?pr2[/?pr1], ?c2 > &#13;&#10;return ?a, ?b " checked>
+				  <label class="form-check-label" for="exampleRadios6">
+				   Q6. Inclusion between arguments premises
+				  </label>
+				  <p><i>Returns pairs of arguments, of which, the premise of the first are all included in the premises of the second.</i> 
+				  
+				  <a id="q6" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q6-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q6query" style="font-family: Courier New"> match ?a: &lt; ?pr1, ?c1 &gt; ?b: &lt; ?pr2[/?pr1], ?c2 &gt; <br /> return ?a, ?b </p>			  
+				  </div>
+				  
+				  <!------------ QUERY 7  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios7" value="match ?a: < ?pr1, ?c1 >, ?b: < ?pr2[.?pr1], ?c2 > &#13;&#10;return ?a, ?b " checked>
+				  <label class="form-check-label" for="exampleRadios7">
+				   Q7. Premise conjunction between two argument patterns
+				  </label>
+				  <p><i>Returns pairs of arguments, the premises of which have at least one common (or equivalent) element.</i> 
+				  
+				  <a id="q7" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q7-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q7query" style="font-family: Courier New"> match ?a: &lt; ?pr1, ?c1 &gt; ?b: &lt; ?pr2[.?pr1], ?c2 &gt; <br /> return ?a, ?b </p>			  
+				  </div>
+				  
+				  <!------------ QUERY 8  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios8" value=" match ?a: <{&quot;David feels that the labor costs are too high and could be brought down in some way&quot;, 
+				  &quot;David feels that the selling costs are too high and could be brought down&quot;}, &quot;the bottom line is okay&quot; > &#13;&#10;return ?a " checked>
+				  <label class="form-check-label" for="exampleRadios8">
+				   Q8. Instant argument
+				  </label>
+				  <p><i>Check whether an instant argument (or arguments with equal propositions) exist in the knowledge base.</i> 
+				  
+				  <a id="q8" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q8-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q8query" style="font-family: Courier New"> match ?a: &lt; {"p1", "p2", "p3"}, "concl" &gt; <br /> return ?a </p>			  
+				  </div>
+				  				  
+				  				  
+				  <!------------ QUERY 9  ------------->
+				  <!-- http://www.aifdb.org/argview/10791 -->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios9" value="match ?a undermine ?b:< ?pr2, &quot;JL is actually financing consumer spending, as opposed to investment&quot; > &#13;&#10;return ?a" checked>
+				  <label class="form-check-label" for="exampleRadios9">
+				   Q9. Simple relations
+				  </label>
+				  <p><i>Search for arguments explicitly related with one of the available relations (rebut, undermine, attack, endorse, back, support).</i> 
+			
+				  <a id="q9" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q9-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q9query" style="font-family: Courier New"> match ?a undermine &lt; ?pr2, "concl" &gt; <br /> return ?a </p>			  
+				  </div>
+				  
+				  <!------------ QUERY 10  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios10" value="match ?a: < ?pr1, &quot;every candidate is a broken record if you listen to them everyday&quot; &gt; &#13;&#10;return ?a " checked>
+				  <label class="form-check-label" for="exampleRadios10">
+				   Q10. Search with equivalent propositions
+				  </label>
+				  <p><i>Searching is performed also with equivalent propositions. In the example, proposition "every candidate is a broken record if you listen to them everyday" is equivalent with the 
+				  "all candidates are broken record" which is the actual conclusion of the argument.</i> 
+				  
+				  <a id="q10" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q10-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q10query" style="font-family: Courier New"> match ?a: &lt; ?pr1, "every candidate is a broken record if you listen to them everyday" &gt; <br /> return ?a </p>			  
+				  </div>
+				  
+				  
+				  <!------------ QUERY 11 ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios11" value="match ?a attack/support ?b &#13;&#10;return path(?a, ?b)" checked>
+				  <label class="form-check-label" for="exampleRadios11">
+				   Q11. Path patterns - explicit 
+				  </label>
+				  <p><i>Expressing a path pattern as a sequence of relations in the graph of arguments</i> 
+				  
+				  <a id="q11" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q11-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q11query" style="font-family: Courier New"> match ?a attack/support ?b <br /> return path(?a, ?b)</p>			  
+				  </div>
+				  
+				  <!------------ QUERY 12  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios12" value="match ?a (back)*5 ?b:  < ?pr1, &quot;Yet if the carriers are not built and properly equipped a shadow will fall over the whole of Britain's defence capability&quot; &gt; &#13;&#10;return path(?a, ?b) " checked>
+				  <label class="form-check-label" for="exampleRadios12">
+				   Q12. Path patterns: * numeric indicator
+				  </label>
+				  <p><i>The <b>path*n</b> numeric indicator in the path pattern implies n repetitions of the path</i> 
+				  
+				  <a id="q12" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q12-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q12query" style="font-family: Courier New"> match ?a (back)*5 ?b: &lt; ?pr1, "Yet if the carriers are not built and properly equipped a shadow will fall over the whole of Britain's defence capability" &gt; <br /> return ?a, ?b</p>			  
+				  </div>
+				  
+				   <!------------ QUERY 13  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios13" value="match ?a (rebut)+2 ?b &#13;&#10;return path(?a, ?b)" checked>
+				  <label class="form-check-label" for="exampleRadios13">
+				   Q13. Path patterns: + numeric indicator
+				  </label>
+				  <p><i>The <b>path+n</b> numeric indicator in the path pattern implies up to n repetitions of the path</i> 
+				  
+				  <a id="q13" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q13-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q13query" style="font-family: Courier New"> match ?a (rebut)+2 ?b <br /> return path(?a, ?b)</p>			  
+				  </div>
+				  
+				   <!------------ QUERY 14  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios14" value="match ?a ((rebut/undermine)*1)+2 ?b: < ?pr, &quot;TRUMP's telling the truth&quot; &gt; &#13;&#10;return path(?a, ?b)" checked>
+				  <label class="form-check-label" for="exampleRadios14">
+				   Q14. Path patterns: combinations
+				  </label>
+				  <p><i>A path pattern can be expressed as an arbitrary number of combinations of explicit path patterns and of paths with numerical indicators. </i> 
+				  
+				  <a id="q14" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q14-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q14query" style="font-family: Courier New"> match ?a ((rebut/undermine)*1)+2 ?b:  &lt; ?pr, "TRUMP's telling the truth" &gt; <br /> return path(?a, ?b)</p>			  
+				  </div>
+				  
+				  
+				  <!------------ QUERY 15  ------------->
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios15" value="match ?a: < ?pr1, &quot;The gun control is not acceptable&quot; &gt; , ?b: &lt; ?pr2[/{&quot;But freedom is responsibility.&quot;}], ?c1 > &#13;&#10;return ?a, ?b" checked>
+				  <label class="form-check-label" for="exampleRadios15">
+				   Q15. Sequence of dialogue patterns
+				  </label>
+				  <p><i>Search for more than one types of dialogue patterns.</i> 
+				  
+				  <a id="q15" data-placement="bottom" data-toggle="popover" data-container="body" type="button" data-html="true" href="#"><span class="glyphicon glyphicon-search" style="margin:3px 0 0 0"></span></a>
+				  
+				  <div id= "q15-popover-content" class = "hide" >
+				  <h5>Query preview</h5>
+				  <p id="q15query" style="font-family: Courier New"> match ?a: &lt; ?pr1, "concl" &gt; , ?b: &lt; ?pr2[/{"p1"}], ?c1 &gt; <br /> return ?a, ?b </p>			  
+				  </div>
+				  
+				  
+				</div>
+				</div>
+
+				<div class="modal-footer">
+				   <button type="button" class="btn btn-primary" id="exampleselectBtn">Select</button>
+     			   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				
+				</div>
+	
+  				
+  				
+  				
+  		<!-- 		
+  				<div class="form-group">
+  					<label class="col-md-4 control-label" for="examples">Select query</label>
+  					<div class="col-md-4"> 
+				    <label class="radio" for="examples-0">
+				      <input name="examples" id="examples-0" type="radio" value="They crash from time to time">
+				      They crash from time to time
+				    </label> 
+				    <label class="radio" for="examples-1">
+				      <input name="examples" id="examples-1" type="radio" value="More than a minute">
+				      More than a minute
+				    </label> 
+				    <label class="radio" for="examples-2">
+				      <input name="examples" id="examples-2" type="radio" value="Less than a minute">
+				      Less than a minute
+				    </label>
+				  </div>
+				</div>
+  				
+  				
+  				
+  			
+  					<p id="q1"> <a href="#"> 1. Get all arguments</a> </p>	 -->
+  				</div>
+  			</div>
+  		</div>
+  </div>
+  <div class="container">
+      <h2>
+        ArgQL EndPoint
+      </h2>
+    <div class="jumbotron">
+
+	  
+	<div class="row" style="margin-top: 10px;" >
+		<div class="col-lg-6">
+			<div class="form-group">
+				<label for="comment">ArgQL query</label>
+				<textarea id="querytextarea" class="form-control" rows="7" id="comment" style="resize:none"></textarea>
+				<!--  <div class="form-check">
+				 <input class="form-check-input" type="radio" name="executionModeRadios" id="normalRadio" value="normal" checked>
+ 				 <label class="form-check-label" for="normalRadio">
+   					 Normal
+ 				 </label>
+ 				 </div>
+ 				 <div class="form-check">
+  					<input class="form-check-input" type="radio" name="executionModeRadios" id="optimizedRadio" value="optimized">
+  					<label class="form-check-label" for="optimizedRadio">
+  					 Optimized
+ 					 </label>
+ 				</div>-->
+				<button id="executebtn" type="button" class="btn btn-default" style="margin-top: 20px;">Execute</button>
+				<button id="moreResultsbtn" type="button" class="btn btn-default" style="margin-top: 20px;" disabled>More Results</button>
+			</div> <!-- form-group--> 
+		</div> <!-- col-lg-6-->
+
+		<div class="col-lg-6">
+			<div class="form-group">
+				<label for="comment">Generated SPARQL query</label>
+				<textarea id="sparqlArea" class="form-control" rows="10" id="comment" style="resize:none" readonly></textarea>
+			</div> <!-- form-group-->
+		</div> <!-- col-lg-6-->
+	</div><!--row-->
+	
+	<div class="form-group" style="margin-top: 40px;">
+				<label for="comment">Output</label>
+				<textarea id="output" class="form-control" rows="15" id="comment" style="resize:none" readonly></textarea>
+			</div> <!-- form-group-->
+	 
+
+    </div> <!-- jumbotron-->
+
+
+  </div> <!-- container-->
+</body>
+</html>

@@ -1,0 +1,2 @@
+# ArgQLEndPoint
+EndPoint ArgQL
